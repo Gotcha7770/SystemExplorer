@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemExplorer", "SystemExplorerCore\SystemExplorer.csproj", "{B1F1AAA6-332F-4654-8747-9953E6C862CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaTestApp", "..\AvaloniaUI\AvaloniaTestApp\AvaloniaTestApp.csproj", "{73F7A832-2FFB-4746-88A0-E22EAC4158A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemExplorer.Desktop", "SystemExplorerCore.Desktop\SystemExplorer.Desktop.csproj", "{679CFE51-2424-460B-96F7-5FF0DC9B1491}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaTestApp.Desktop", "..\AvaloniaUI\AvaloniaTestApp.Desktop\AvaloniaTestApp.Desktop.csproj", "{71D98C78-459A-4039-AB2E-8B40531E3FD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B1F1AAA6-332F-4654-8747-9953E6C862CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1F1AAA6-332F-4654-8747-9953E6C862CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1F1AAA6-332F-4654-8747-9953E6C862CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1F1AAA6-332F-4654-8747-9953E6C862CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{679CFE51-2424-460B-96F7-5FF0DC9B1491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{679CFE51-2424-460B-96F7-5FF0DC9B1491}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{679CFE51-2424-460B-96F7-5FF0DC9B1491}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{679CFE51-2424-460B-96F7-5FF0DC9B1491}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73F7A832-2FFB-4746-88A0-E22EAC4158A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73F7A832-2FFB-4746-88A0-E22EAC4158A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73F7A832-2FFB-4746-88A0-E22EAC4158A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73F7A832-2FFB-4746-88A0-E22EAC4158A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71D98C78-459A-4039-AB2E-8B40531E3FD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71D98C78-459A-4039-AB2E-8B40531E3FD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71D98C78-459A-4039-AB2E-8B40531E3FD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71D98C78-459A-4039-AB2E-8B40531E3FD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
