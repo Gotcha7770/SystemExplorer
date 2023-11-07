@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls;
 
-namespace SystemExplorerCore.Views;
+namespace SystemExplorer.Views;
 
 public partial class MainView : UserControl
 {

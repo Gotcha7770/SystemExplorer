@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemExplorerCore", "SystemExplorerCore\SystemExplorerCore.csproj", "{B1F1AAA6-332F-4654-8747-9953E6C862CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemExplorer", "SystemExplorerCore\SystemExplorer.csproj", "{B1F1AAA6-332F-4654-8747-9953E6C862CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemExplorerCore.Desktop", "SystemExplorerCore.Desktop\SystemExplorerCore.Desktop.csproj", "{679CFE51-2424-460B-96F7-5FF0DC9B1491}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemExplorer.Desktop", "SystemExplorerCore.Desktop\SystemExplorer.Desktop.csproj", "{679CFE51-2424-460B-96F7-5FF0DC9B1491}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,10 +2,10 @@
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-using SystemExplorerCore.ViewModels;
-using SystemExplorerCore.Views;
+using SystemExplorer.ViewModels;
+using SystemExplorer.Views;
 
-namespace SystemExplorerCore;
+namespace SystemExplorer;
 
 public partial class App : Application
 {

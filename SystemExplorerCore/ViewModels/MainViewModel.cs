@@ -1,4 +1,4 @@
-﻿namespace SystemExplorerCore.ViewModels;
+﻿namespace SystemExplorer.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
