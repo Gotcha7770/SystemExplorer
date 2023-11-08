@@ -14,6 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SystemExplorerCore\SystemExplorer.csproj" />
+    <ProjectReference Include="..\SystemExplorer\SystemExplorer.csproj" />
   </ItemGroup>
 </Project>
