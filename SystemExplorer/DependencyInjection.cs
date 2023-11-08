@@ -8,7 +8,7 @@ namespace SystemExplorer;
 
 public class DependencyInjection : Application
 {
-
+    // https://github.com/AvaloniaUI/Avalonia/issues/5241
     public static Window? FocusedWindow =>
         Current?.DataTemplates
         .Select(t => t.Build(null))
