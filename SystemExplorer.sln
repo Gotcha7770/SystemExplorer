@@ -5,6 +5,13 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemExplorer", "SystemExplorer\SystemExplorer.csproj", "{FA6828F4-D3E3-424B-962C-64EEBD1A40E0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{DB2558D8-B564-4632-9F19-0E08C4CB2087}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{7079BA01-34DF-4887-9E0B-910F19721158}"
+	ProjectSection(SolutionItems) = preProject
+		HostBuilderExtension.cs = HostBuilderExtension.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +25,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7079BA01-34DF-4887-9E0B-910F19721158} = {DB2558D8-B564-4632-9F19-0E08C4CB2087}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3364BC6C-7B19-48B0-A780-8C986794D62A}
