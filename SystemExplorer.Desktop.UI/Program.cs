@@ -3,7 +3,7 @@
 using Avalonia;
 using Avalonia.ReactiveUI;
 
-namespace SystemExplorer.Desktop.UI.Desktop;
+namespace SystemExplorer.Desktop.UI;
 
 class Program
 {
