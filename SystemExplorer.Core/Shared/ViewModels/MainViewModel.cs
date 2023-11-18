@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using System.Xml.XPath;
 using SystemExplorer.Core.Shared.BaseModels.Abstract;
@@ -29,6 +31,7 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged(nameof(FilePath));
         }
     }
+
     public string Name
     {
         get => name;
@@ -72,9 +75,29 @@ public class MainViewModel : BaseViewModel
     #endregion
 
     #region Commands
-    public ICommand OpenCommand => new DelegateCommand(Open);
-    public ICommand OpenTargetDirectoryCommand => new DelegateCommand(OpenTargetDirectory);
+    public ICommand OpenCommand => 
+        new DelegateCommand(Open);
 
+    public ICommand OpenTargetDirectoryCommand => 
+        new DelegateCommand(OpenTargetDirectory);
+    #endregion
+
+    #region Private Command Methods
+    private void Open(object? parameter = null)
+    {
+        if (parameter is DirectoryViewModel directoryViewModel)
+        {
+            FilePath = directoryViewModel.FullName;
+            Name = directoryViewModel.Name;
+            Directories.Clear();
+
+            SwitchDirectory();
+        }
+        else if (parameter is FileViewModel fileViewModel)
+        {
+            ExecuteFile(fileViewModel);
+        }
+    }
     private void OpenTargetDirectory(object? parameter = null)
     {
         string? filePath = parameter?.ToString();
@@ -87,30 +110,42 @@ public class MainViewModel : BaseViewModel
     #endregion
 
     #region Private Methods
-    private void Open(object? parameter = null)
+    private void ExecuteFile(FileViewModel fileViewModel)
     {
-        if (parameter is DirectoryViewModel directoryViewModel)
+        Process p = new()
         {
-            FilePath = directoryViewModel.FullName;
-            Name = directoryViewModel.Name;
-
-            Directories.Clear();
-
-            var dirInfo = new DirectoryInfo(FilePath);
-            try
+            StartInfo = new()
             {
-                foreach (var dir in dirInfo.GetDirectories())
-                    Directories.Add(new DirectoryViewModel(dir));
-
-                foreach (var file in dirInfo.GetFiles())
-                    Directories.Add(new FileViewModel(file));
+                UseShellExecute = true,
+                FileName = $"{fileViewModel.FullName}"
             }
-            catch (Exception ex)
+        };
+
+        try
+        {
+            p.Start();
+        }
+        catch (Exception Ex)
+        {
+            //...
+        }
+    }
+    private void SwitchDirectory()
+    {
+        var dirInfo = new DirectoryInfo(FilePath);
+        try
+        {
+            foreach (var dir in dirInfo.GetDirectories())
+                Directories.Add(new DirectoryViewModel(dir));
+
+            foreach (var file in dirInfo.GetFiles())
+                Directories.Add(new FileViewModel(file));
+        }
+        catch (Exception ex)
+        {
+            if (ex is UnauthorizedAccessException)
             {
-                if (ex is UnauthorizedAccessException)
-                {
-                    throw new UnauthorizedAccessException("You don`t have rights to access this folder.");
-                }
+                throw new UnauthorizedAccessException("You don`t have rights to access this folder.");
             }
         }
     }
