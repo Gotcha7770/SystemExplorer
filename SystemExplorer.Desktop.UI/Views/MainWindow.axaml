@@ -17,8 +17,13 @@
 						<RowDefinition/>
 					</Grid.RowDefinitions>
 
-					<TextBlock Text="{Binding MainDirectory}"
-							   Grid.Row="0"/>
+					<TextBox Text="{Binding FilePath, Mode=TwoWay}" Grid.Row="0">
+						<TextBox.KeyBindings>
+							<KeyBinding Gesture="Enter" 
+										Command="{Binding OpenTargetDirectoryCommand}" 
+										CommandParameter="{Binding FilePath}"/>
+						</TextBox.KeyBindings>
+					</TextBox>
 
 					<ListBox ItemsSource="{Binding Directories}"
 							 SelectedItem="{Binding SelectedFile}"
