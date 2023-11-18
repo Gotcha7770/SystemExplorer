@@ -16,8 +16,6 @@ public class MainViewModel : BaseViewModel
     private string filePath = string.Empty;
     private string name = string.Empty;
     private ObservableCollection<FileEntityViewModel> directories = new();
-
-
     private FileEntityViewModel selectedFile;
     #endregion
 

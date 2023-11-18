@@ -34,15 +34,18 @@
 													 CommandParameter="{Binding SelectedFile}"/>
 							</EventTriggerBehavior>
 						</Interaction.Behaviors>
+						<ListBox.KeyBindings>
+							<KeyBinding Command="{Binding OpenCommand}" 
+										CommandParameter="{Binding SelectedFile}" 
+										Gesture="Enter"/>
+						</ListBox.KeyBindings>
 						<ListBox.ItemTemplate>
 							<DataTemplate>
 								<Grid Background="Transparent">
 									<TextBlock Text="{Binding Name}"/>
 								</Grid>
 							</DataTemplate>
-						</ListBox.ItemTemplate>
-						
-						
+						</ListBox.ItemTemplate>			
 					</ListBox>
 				</Grid>
 			</TabItem>
