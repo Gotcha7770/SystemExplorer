@@ -15,6 +15,7 @@ public class MainViewModel : BaseViewModel
     private string name = string.Empty;
     private ObservableCollection<FileEntityViewModel> directories = new();
 
+
     private FileEntityViewModel selectedFile;
     #endregion
 
@@ -37,6 +38,7 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
+
     public ObservableCollection<FileEntityViewModel> Directories
     {
         get => directories;
@@ -46,7 +48,7 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    
+
     public FileEntityViewModel SelectedFile 
     { 
         get => selectedFile;
@@ -98,9 +100,10 @@ public class MainViewModel : BaseViewModel
             try
             {
                 foreach (var dir in dirInfo.GetDirectories())
-                {
                     Directories.Add(new DirectoryViewModel(dir));
-                }
+
+                foreach (var file in dirInfo.GetFiles())
+                    Directories.Add(new FileViewModel(file));
             }
             catch (Exception ex)
             {
@@ -109,10 +112,6 @@ public class MainViewModel : BaseViewModel
                     throw new UnauthorizedAccessException("You don`t have rights to access this folder.");
                 }
             }
-
-            foreach (var file in dirInfo.GetFiles())
-                Directories.Add(new FileViewModel(file));
-
         }
     }
     #endregion

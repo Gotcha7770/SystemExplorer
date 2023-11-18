@@ -4,17 +4,17 @@ namespace SystemExplorer.Core.Shared.Entities;
 
 public sealed class FileViewModel : FileEntityViewModel
 {
-    public string FullName { get; set; }
+    public string Name { get; set; }
 
-    public FileViewModel(string fileName) 
-        : base(fileName)
+    public FileViewModel(string fileFullName, string fileName) 
+        : base(fileFullName)
     {
-        FullName = fileName;
+        Name = fileName;
     }
 
     public FileViewModel(FileInfo fileName)
         : base(fileName.FullName)
     {
-        FullName = fileName.FullName;
+        Name = fileName.Name;
     }
 }
