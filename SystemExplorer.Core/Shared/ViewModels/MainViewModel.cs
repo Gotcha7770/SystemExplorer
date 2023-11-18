@@ -1,7 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Xml.XPath;
 using SystemExplorer.Core.Shared.BaseModels.Abstract;
+using SystemExplorer.Core.Shared.Commands;
 using SystemExplorer.Core.Shared.Entities;
+using SystemExplorer.Core.Shared.Entities.Abstract;
 
 namespace SystemExplorer.Core.Shared.BaseModels;
 
@@ -11,6 +14,7 @@ public class MainViewModel : BaseViewModel
     private string filePath = string.Empty;
     private string name = string.Empty;
     private ObservableCollection<FileEntityViewModel> directories = new();
+
     private FileEntityViewModel selectedFile;
     #endregion
 
@@ -21,7 +25,7 @@ public class MainViewModel : BaseViewModel
         set
         {
             Set(ref filePath, value);
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(FilePath));
         }
     }
     public string Name
@@ -42,6 +46,7 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
+    
     public FileEntityViewModel SelectedFile 
     { 
         get => selectedFile;
@@ -66,6 +71,17 @@ public class MainViewModel : BaseViewModel
 
     #region Commands
     public ICommand OpenCommand => new DelegateCommand(Open);
+    public ICommand OpenTargetDirectoryCommand => new DelegateCommand(OpenTargetDirectory);
+
+    private void OpenTargetDirectory(object? parameter = null)
+    {
+        string? filePath = parameter?.ToString();
+        if (!string.IsNullOrEmpty(filePath))
+        {
+            var DirectoryVM = new DirectoryViewModel(new DirectoryInfo(filePath));
+            Open(DirectoryVM);
+        }
+    }
     #endregion
 
     #region Private Methods

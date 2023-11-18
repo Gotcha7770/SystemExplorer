@@ -1,4 +1,6 @@
-﻿namespace SystemExplorer.Core.Shared.Entities;
+﻿using SystemExplorer.Core.Shared.Entities.Abstract;
+
+namespace SystemExplorer.Core.Shared.Entities;
 
 public sealed class FileViewModel : FileEntityViewModel
 {
