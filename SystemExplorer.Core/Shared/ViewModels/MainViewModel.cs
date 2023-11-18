@@ -123,9 +123,16 @@ public class MainViewModel : BaseViewModel
         {
             p.Start();
         }
-        catch (Exception Ex)
+        catch (Exception ex)
         {
-            //...
+            switch (ex)
+            {
+                case InvalidOperationException:
+                    throw new InvalidOperationException(ex.Message);
+                case PlatformNotSupportedException:
+                    throw new PlatformNotSupportedException(ex.Message);
+            }
+
         }
     }
     private void SwitchDirectory()
@@ -141,9 +148,12 @@ public class MainViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            if (ex is UnauthorizedAccessException)
+            switch (ex)
             {
-                throw new UnauthorizedAccessException("You don`t have rights to access this folder.");
+                case UnauthorizedAccessException:
+                    throw new UnauthorizedAccessException(ex.Message);
+                case ArgumentNullException:
+                    throw new ArgumentNullException(ex.Message);
             }
         }
     }
