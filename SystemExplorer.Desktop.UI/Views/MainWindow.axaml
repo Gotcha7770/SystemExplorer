@@ -4,51 +4,58 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:SystemExplorer.Desktop.UI.Views"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:controls="clr-namespace:SystemExplorer.Desktop.UI.Controls;assembly=SystemExplorer.Desktop.UI"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SystemExplorer.Desktop.UI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="SystemExplorer.Desktop.UI">
 	<Grid>
-		<TabControl>
-			<TabItem Header="{Binding Name}">
-				<Grid>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="auto"/>
-						<RowDefinition/>
-					</Grid.RowDefinitions>
+		<TabControl ItemsSource="{Binding DirectoryTabItems}"
+					SelectedItem="{Binding CurrentDirectoryTabItem}">
+			<TabControl.Template>
+				<ControlTemplate>
+					<Border Margin="{TemplateBinding Margin}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							Background="{TemplateBinding Background}"
+							HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+							VerticalAlignment="{TemplateBinding VerticalAlignment}">
+						<StackPanel>
+							<StackPanel Orientation="Horizontal">
+								<ItemsPresenter Name="PART_ItemsPresenter"
+												ItemsPanel="{TemplateBinding ItemsPanel}"/>
+								<Button Margin="2"
+										Command="{Binding AddTabItemCommand}"
+										Content="+"
+										Width="{Binding $self.Bounds.Height}"/>
+							</StackPanel>
+							<ContentPresenter Name="PART_SelectedContentHost"
+											  Margin="{TemplateBinding Padding}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+											  Content="{TemplateBinding SelectedContent}"
+											  ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+						</StackPanel>
+					</Border>
+				</ControlTemplate>
+			</TabControl.Template>
 
-					<TextBox Text="{Binding FilePath, Mode=TwoWay}" Grid.Row="0">
-						<TextBox.KeyBindings>
-							<KeyBinding Gesture="Enter" 
-										Command="{Binding OpenTargetDirectoryCommand}" 
-										CommandParameter="{Binding FilePath}"/>
-						</TextBox.KeyBindings>
-					</TextBox>
-
-					<ListBox ItemsSource="{Binding Directories}"
-							 SelectedItem="{Binding SelectedFile}"
-							 Grid.Row="1">
-						<Interaction.Behaviors>
-							<EventTriggerBehavior EventName="DoubleTapped">
-								<InvokeCommandAction Command="{Binding OpenCommand}"
-													 CommandParameter="{Binding SelectedFile}"/>
-							</EventTriggerBehavior>
-						</Interaction.Behaviors>
-						<ListBox.KeyBindings>
-							<KeyBinding Command="{Binding OpenCommand}" 
-										CommandParameter="{Binding SelectedFile}" 
-										Gesture="Enter"/>
-						</ListBox.KeyBindings>
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<Grid Background="Transparent">
-									<TextBlock Text="{Binding Name}"/>
-								</Grid>
-							</DataTemplate>
-						</ListBox.ItemTemplate>			
-					</ListBox>
-				</Grid>
-			</TabItem>
+			<TabControl.ItemTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="{Binding Name}"/>
+						<Button Command="{Binding CloseCommand}"
+								Content="X"
+								Width="{Binding $self.Bounds.Height}"/>
+					</StackPanel>
+				</DataTemplate>
+			</TabControl.ItemTemplate>
+			
+			<TabControl.ContentTemplate>
+				<DataTemplate>
+					<controls:DirectoryTabItem/>
+				</DataTemplate>
+			</TabControl.ContentTemplate>
 		</TabControl>
 	</Grid>
 </Window>
