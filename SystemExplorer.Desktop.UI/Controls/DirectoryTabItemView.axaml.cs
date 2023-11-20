@@ -1,11 +1,10 @@
 using Avalonia.Controls;
-using Avalonia.Controls.Presenters;
 
 namespace SystemExplorer.Desktop.UI.Controls
 {
-    public partial class DirectoryTabItem : UserControl
+    public partial class DirectoryTabItemView : UserControl
     {
-        public DirectoryTabItem()
+        public DirectoryTabItemView()
         {
             InitializeComponent();
         }

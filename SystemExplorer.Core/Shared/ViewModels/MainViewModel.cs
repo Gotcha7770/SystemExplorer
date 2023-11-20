@@ -13,7 +13,7 @@ public class MainViewModel : BaseViewModel
 {
     #region Private Variables
     private ObservableCollection<DirectoryTabItemViewModel> directoryTabItems = new();
-    private DirectoryTabItemViewModel? currentDirectoryTabItem;
+    private DirectoryTabItemViewModel currentDirectoryTabItem;
     #endregion
 
     #region Public Properties
@@ -26,13 +26,13 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public DirectoryTabItemViewModel? CurrentDirectoryTabItem 
+    public DirectoryTabItemViewModel CurrentDirectoryTabItem 
     { 
         get => currentDirectoryTabItem;
         set 
         {
             Set(ref currentDirectoryTabItem, value);
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(CurrentDirectoryTabItem));
         }
     }
     #endregion
@@ -63,7 +63,6 @@ public class MainViewModel : BaseViewModel
 
         DirectoryTabItems.Add(vm);
         CurrentDirectoryTabItem = vm;
-
     }
 
     private void VMClosed(object sender, EventArgs e)

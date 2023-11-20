@@ -6,12 +6,12 @@
         xmlns:views="clr-namespace:SystemExplorer.Desktop.UI.Views"
         xmlns:controls="clr-namespace:SystemExplorer.Desktop.UI.Controls;assembly=SystemExplorer.Desktop.UI"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="SystemExplorer.Desktop.UI.Views.MainWindow"
+        x:Class="SystemExplorer.Desktop.UI.Views.MainView"
         Icon="/Assets/avalonia-logo.ico"
         Title="SystemExplorer.Desktop.UI">
 	<Grid>
 		<TabControl ItemsSource="{Binding DirectoryTabItems}"
-					SelectedItem="{Binding CurrentDirectoryTabItem}">
+	                SelectedItem="{Binding CurrentDirectoryTabItem}">
 			<TabControl.Template>
 				<ControlTemplate>
 					<Border Margin="{TemplateBinding Margin}"
@@ -39,8 +39,8 @@
 					</Border>
 				</ControlTemplate>
 			</TabControl.Template>
-
-			<TabControl.ItemTemplate>
+			
+			<TabControl.ItemTemplate>				
 				<DataTemplate>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="{Binding Name}"/>
@@ -51,11 +51,12 @@
 				</DataTemplate>
 			</TabControl.ItemTemplate>
 			
-			<TabControl.ContentTemplate>
+			<TabControl.ContentTemplate>				
 				<DataTemplate>
-					<controls:DirectoryTabItem/>
+					<controls:DirectoryTabItemView/>
 				</DataTemplate>
 			</TabControl.ContentTemplate>
+
 		</TabControl>
 	</Grid>
 </Window>

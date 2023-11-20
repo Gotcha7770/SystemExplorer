@@ -27,4 +27,13 @@
   <ItemGroup>
     <ProjectReference Include="..\SystemExplorer.Core\SystemExplorer.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\DirectoryTabItemView.axaml.cs">
+      <DependentUpon>DirectoryTabItemView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MainView.axaml.cs">
+      <DependentUpon>MainView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

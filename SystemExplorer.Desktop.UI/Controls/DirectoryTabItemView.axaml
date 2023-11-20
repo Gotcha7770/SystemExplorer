@@ -4,15 +4,15 @@
              xmlns:vm="using:SystemExplorer.Core.Shared.ViewModels"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="SystemExplorer.Desktop.UI.Controls.DirectoryTabItem">
+             x:Class="SystemExplorer.Desktop.UI.Controls.DirectoryTabItemView">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
-			<RowDefinition/>
+			<RowDefinition Height="250"/>
 		</Grid.RowDefinitions>
-	
+		
 		<TextBox Text="{Binding FilePath}"/>
-
+		
 		<ListBox Grid.Row="1"
 				 ItemsPanel="{Binding Directories}"
 				 SelectedItem="{Binding SelectedFile}">

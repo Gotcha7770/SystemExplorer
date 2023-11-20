@@ -1,7 +1,8 @@
 ﻿using System;
-
+using System.ComponentModel;
 using Avalonia;
 using Avalonia.ReactiveUI;
+using Microsoft.CodeAnalysis.FlowAnalysis;
 
 namespace SystemExplorer.Desktop.UI;
 
@@ -16,7 +17,7 @@ class Program
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>()
+        => AppBuilder.Configure<App>()            
             .UsePlatformDetect()
             .WithInterFont()
             .LogToTrace()
