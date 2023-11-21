@@ -123,15 +123,31 @@ public class DirectoryTabItemViewModel : BaseViewModel
 
         string path = FilePath + @"\Новая папка";
 
-        var newDirectoryIndex = Directory.GetDirectories(FilePath)
-            .Select(s => s[s.LastIndexOf('\\')..][1..])
-            .Where(s => s.Contains("Новая папка") 
-                && !s.Equals("Новая папка") 
-                && int.TryParse(s[(s.IndexOf('(') + 1)..s.IndexOf(')')], out _))
-            .Select(s => int.Parse(s[(s.IndexOf('(') + 1)..s.IndexOf(')')]))?.Max() ?? 1;
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        else
+        {
+            var t = Directory.GetDirectories(FilePath)
+                .Select(s => s[s.LastIndexOf('\\')..][1..])
+                .Where(s => s.Contains("Новая папка") && !s.Equals("Новая папка"));
 
-        Directory.CreateDirectory(path + $" ({newDirectoryIndex + 1})");
+            if (!t.Any())
+            {
+                Directory.CreateDirectory(path + " (1)");
+            }
+            else
+            {
+                int newDirectoryIndex = t
+                    .Where(s => int.TryParse(s[(s.IndexOf('(') + 1)..s.IndexOf(')')], out _))
+                    .Select(s => int.Parse(s[(s.IndexOf('(') + 1)..s.IndexOf(')')])).Max();
+
+                Directory.CreateDirectory(path + $" ({newDirectoryIndex + 1})");
+            }
+        }
     }
+
     private void Update(object obj)
     {
         throw new NotImplementedException();
