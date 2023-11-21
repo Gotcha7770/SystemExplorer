@@ -2,6 +2,8 @@
 using System.Windows.Input;
 using SystemExplorer.Core.Shared.BaseModels.Abstract;
 using SystemExplorer.Core.Shared.Commands;
+using SystemExplorer.Core.Shared.Entities;
+using SystemExplorer.Core.Shared.Entities.Abstract;
 using SystemExplorer.Core.Shared.ViewModels;
 
 namespace SystemExplorer.Core.Shared.BaseModels;
