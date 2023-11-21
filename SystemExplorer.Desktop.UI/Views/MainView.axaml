@@ -53,10 +53,12 @@
 			
 			<TabControl.ContentTemplate>				
 				<DataTemplate>
-					<controls:DirectoryTabItemView/>
+					<controls:DirectoryTabItemView />
 				</DataTemplate>
 			</TabControl.ContentTemplate>
-
 		</TabControl>
+		
+		<TabItem/>
+		
 	</Grid>
 </Window>

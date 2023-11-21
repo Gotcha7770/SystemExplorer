@@ -1,10 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows.Input;
 using SystemExplorer.Core.Shared.BaseModels.Abstract;
 using SystemExplorer.Core.Shared.Commands;
-using SystemExplorer.Core.Shared.Entities;
-using SystemExplorer.Core.Shared.Entities.Abstract;
 using SystemExplorer.Core.Shared.ViewModels;
 
 namespace SystemExplorer.Core.Shared.BaseModels;
@@ -13,7 +10,7 @@ public class MainViewModel : BaseViewModel
 {
     #region Private Variables
     private ObservableCollection<DirectoryTabItemViewModel> directoryTabItems = new();
-    private DirectoryTabItemViewModel currentDirectoryTabItem;
+    private DirectoryTabItemViewModel currentDirectoryTabItem = new();
     #endregion
 
     #region Public Properties
