@@ -6,6 +6,7 @@
         xmlns:views="clr-namespace:SystemExplorer.Desktop.UI.Views"
 		xmlns:controls="using:SystemExplorer.Desktop.UI.Controls"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		MinHeight="600" MinWidth="800"
         x:Class="SystemExplorer.Desktop.UI.Views.MainView"
 		x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -57,9 +58,6 @@
 					<controls:DirectoryTabItemView/>
 				</DataTemplate>
 			</TabControl.ContentTemplate>
-		</TabControl>
-		
-		<TabItem/>
-		
+		</TabControl>		
 	</Grid>
 </Window>

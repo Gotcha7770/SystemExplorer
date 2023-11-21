@@ -36,8 +36,4 @@
       <DependentUpon>MainView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
-
-	<PropertyGroup>
-		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-	</PropertyGroup>
 </Project>

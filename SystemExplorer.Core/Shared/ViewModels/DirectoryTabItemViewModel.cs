@@ -1,5 +1,4 @@
-﻿
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using SystemExplorer.Core.Shared.BaseModels.Abstract;
@@ -60,7 +59,6 @@ public class DirectoryTabItemViewModel : BaseViewModel
     }
     #endregion
 
-    #region Ctor
     public DirectoryTabItemViewModel()
     {
         Name = "This computer";
@@ -68,7 +66,6 @@ public class DirectoryTabItemViewModel : BaseViewModel
         foreach (var dir in Directory.GetLogicalDrives())
             Directories.Add(new DirectoryViewModel(new DirectoryInfo(dir)));
     }
-    #endregion
 
     #region Commands
     public ICommand OpenCommand =>
@@ -77,29 +74,14 @@ public class DirectoryTabItemViewModel : BaseViewModel
     public ICommand OpenTargetDirectoryCommand =>
         new DelegateCommand(OpenTargetDirectory);
 
-    public ICommand CreateCommand =>
-        new DelegateCommand(Create);
-
-    private void Create(object obj)
-    {
-        throw new NotImplementedException();
-    }
+    public ICommand CreateDirectoryCommand =>
+        new DelegateCommand(CreateDirectory);
 
     public ICommand UpdateCommand =>
         new DelegateCommand(Update);
 
-    private void Update(object obj)
-    {
-        throw new NotImplementedException();
-    }
-
     public ICommand DeleteCommand =>
         new DelegateCommand(Delete);
-
-    private void Delete(object obj)
-    {
-        throw new NotImplementedException();
-    }
 
     public ICommand CloseCommand =>
         new DelegateCommand(Close);
@@ -110,7 +92,6 @@ public class DirectoryTabItemViewModel : BaseViewModel
 
     public event EventHandler? Closed;
 
-    #region Private Command Methods
     private void Open(object? parameter = null)
     {
         if (parameter is DirectoryViewModel directoryViewModel)
@@ -135,9 +116,31 @@ public class DirectoryTabItemViewModel : BaseViewModel
             Open(DirectoryVM);
         }
     }
-    #endregion
 
-    #region Private Methods
+    private void CreateDirectory(object? parameter)
+    {
+        if (string.IsNullOrEmpty(parameter?.ToString())) return;
+
+        string path = FilePath + @"\Новая папка";
+
+        var newDirectoryIndex = Directory.GetDirectories(FilePath)
+            .Select(s => s[s.LastIndexOf('\\')..][1..])
+            .Where(s => s.Contains("Новая папка") 
+                && !s.Equals("Новая папка") 
+                && int.TryParse(s[(s.IndexOf('(') + 1)..s.IndexOf(')')], out _))
+            .Select(s => int.Parse(s[(s.IndexOf('(') + 1)..s.IndexOf(')')]))?.Max() ?? 1;
+
+        Directory.CreateDirectory(path + $" ({newDirectoryIndex + 1})");
+    }
+    private void Update(object obj)
+    {
+        throw new NotImplementedException();
+    }
+    private void Delete(object obj)
+    {
+        throw new NotImplementedException();
+    }
+
     private void ExecuteFile(FileViewModel fileViewModel)
     {
         Process p = new()
@@ -187,5 +190,4 @@ public class DirectoryTabItemViewModel : BaseViewModel
             }
         }
     }
-    #endregion
 }
