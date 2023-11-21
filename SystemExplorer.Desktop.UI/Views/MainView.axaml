@@ -1,12 +1,13 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:SystemExplorer.Core.Shared.ViewModels"
+        xmlns:vm="clr-namespace:SystemExplorer.Core.Shared.ViewModels;assembly=SystemExplorer.Core"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:SystemExplorer.Desktop.UI.Views"
-        xmlns:controls="clr-namespace:SystemExplorer.Desktop.UI.Controls;assembly=SystemExplorer.Desktop.UI"
+		xmlns:controls="using:SystemExplorer.Desktop.UI.Controls"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SystemExplorer.Desktop.UI.Views.MainView"
+		x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="SystemExplorer.Desktop.UI">
 	<Grid>
@@ -51,8 +52,8 @@
 				</DataTemplate>
 			</TabControl.ItemTemplate>
 			
-			<TabControl.ContentTemplate>				
-				<DataTemplate>
+			<TabControl.ContentTemplate>
+				<DataTemplate DataType="{x:Type vm:DirectoryTabItemViewModel}">
 					<controls:DirectoryTabItemView/>
 				</DataTemplate>
 			</TabControl.ContentTemplate>

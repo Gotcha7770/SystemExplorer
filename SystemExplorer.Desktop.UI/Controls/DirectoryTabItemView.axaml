@@ -4,7 +4,9 @@
              xmlns:vm="using:SystemExplorer.Core.Shared.ViewModels"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="SystemExplorer.Desktop.UI.Controls.DirectoryTabItemView">
+             x:Class="SystemExplorer.Desktop.UI.Controls.DirectoryTabItemView"
+			 x:DataType="vm:DirectoryTabItemViewModel"
+			 x:CompileBindings="True">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
@@ -24,7 +26,7 @@
 			</Interaction.Behaviors>
 			
 			<ListBox.ItemTemplate>
-				<DataTemplate>
+				<DataTemplate DataType="{x:Type vm:DirectoryTabItemViewModel} ">
 					<Grid Background="Transparent">
 						<TextBlock Text="{Binding Name}"/>
 					</Grid>

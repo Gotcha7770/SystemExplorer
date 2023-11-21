@@ -3,11 +3,9 @@ using System.Diagnostics;
 using System.Windows.Input;
 using SystemExplorer.Core.Shared.BaseModels.Abstract;
 using SystemExplorer.Core.Shared.Commands;
-using SystemExplorer.Core.Shared.Entities;
-using SystemExplorer.Core.Shared.Entities.Abstract;
-using SystemExplorer.Core.Shared.ViewModels;
 
-namespace SystemExplorer.Core.Shared.BaseModels;
+
+namespace SystemExplorer.Core.Shared.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
@@ -61,9 +59,12 @@ public class MainViewModel : BaseViewModel
         var vm = new DirectoryTabItemViewModel();
         vm.Closed += VMClosed;
 
-        DirectoryTabItems.Add(vm);
+        directoryTabItems.Add(vm);
+
         CurrentDirectoryTabItem = vm;
     }
+
+
 
     private void VMClosed(object sender, EventArgs e)
     {
