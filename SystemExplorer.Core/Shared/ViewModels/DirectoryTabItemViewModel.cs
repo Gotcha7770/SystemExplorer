@@ -7,22 +7,25 @@ using SystemExplorer.Core.Shared.Entities.Abstract;
 using SystemExplorer.Core.Shared.Entities;
 
 namespace SystemExplorer.Core.Shared.ViewModels;
-
+/// <summary>
+/// TODO: <br/>
+/// 1) Use certain ENUM for a corresponding file system? <br/>
+/// 2) Distribute methods to their ViewModels and make them static <br/>
+/// 3) Improve methods create, delete, update (they`re too heavy and partially dumb as ****) <br/>
+/// </summary>
 public class DirectoryTabItemViewModel : BaseViewModel
 {
     #region Private Variables
     private string filePath = string.Empty;
     private string name = string.Empty;
     private string newFileNameInput = "Введите название файла:";
-    // Use certain ENUM for a corresponding file system
     private List<string> fileExtensions = new List<string>() 
     { ".txt", ".doc", ".xml", ".zip"};
-    private string selectedExtension;
+    private string? selectedExtension;
     private ObservableCollection<FileEntityViewModel> directories = new();
     private FileEntityViewModel? selectedFile;
-    #endregion
+    #endregion Private Variables
 
-    #region Public Properties
     public string FilePath
     {
         get => filePath;
@@ -56,7 +59,7 @@ public class DirectoryTabItemViewModel : BaseViewModel
     public List<string> FileExtensions 
         => fileExtensions;
 
-    public string SelectedExtension
+    public string? SelectedExtension
     {
         get => selectedExtension;
         set
@@ -85,7 +88,6 @@ public class DirectoryTabItemViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    #endregion
 
     public DirectoryTabItemViewModel()
     {
@@ -122,7 +124,6 @@ public class DirectoryTabItemViewModel : BaseViewModel
 
     private void Close(object obj) =>
         Closed?.Invoke(this, EventArgs.Empty);
-
     private void Open(object? parameter = null)
     {
         if (parameter is DirectoryViewModel directoryViewModel)
@@ -147,7 +148,6 @@ public class DirectoryTabItemViewModel : BaseViewModel
             Open(DirectoryVM);
         }
     }
-
     private void CreateDirectory(object? parameter)
     {
         if (string.IsNullOrEmpty(parameter?.ToString())) return;
@@ -246,8 +246,31 @@ public class DirectoryTabItemViewModel : BaseViewModel
             File.Delete(fileViewModel.FullName);
             Directories.Remove(fileViewModel);
         }
+    }  
+    private void SwitchDirectory()
+    {
+        var dirInfo = new DirectoryInfo(FilePath);
+        try
+        {
+            foreach (var dir in dirInfo.GetDirectories())
+                Directories.Add(new DirectoryViewModel(dir));
+
+            foreach (var file in dirInfo.GetFiles())
+                Directories.Add(new FileViewModel(file));
+        }
+        catch (Exception ex)
+        {
+            switch (ex)
+            {
+                case UnauthorizedAccessException:
+                    throw new UnauthorizedAccessException(ex.Message);
+                case ArgumentNullException:
+                    throw new ArgumentNullException(ex.Message);
+            }
+        }
     }
-    private void ExecuteFile(FileViewModel fileViewModel)
+
+    private static void ExecuteFile(FileViewModel fileViewModel)
     {
         Process p = new()
         {
@@ -270,29 +293,6 @@ public class DirectoryTabItemViewModel : BaseViewModel
                     throw new InvalidOperationException(ex.Message);
                 case PlatformNotSupportedException:
                     throw new PlatformNotSupportedException(ex.Message);
-            }
-
-        }
-    }
-    private void SwitchDirectory()
-    {
-        var dirInfo = new DirectoryInfo(FilePath);
-        try
-        {
-            foreach (var dir in dirInfo.GetDirectories())
-                Directories.Add(new DirectoryViewModel(dir));
-
-            foreach (var file in dirInfo.GetFiles())
-                Directories.Add(new FileViewModel(file));
-        }
-        catch (Exception ex)
-        {
-            switch (ex)
-            {
-                case UnauthorizedAccessException:
-                    throw new UnauthorizedAccessException(ex.Message);
-                case ArgumentNullException:
-                    throw new ArgumentNullException(ex.Message);
             }
         }
     }
