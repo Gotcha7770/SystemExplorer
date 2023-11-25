@@ -195,13 +195,42 @@ public class DirectoryTabItemViewModel : BaseViewModel
         {
             throw new Exception("Файл с данным названием уже существует в указанном расположении.");
         }
+        NewFileNameInput = "Введите название файла: ";
     }
-
-    private void Update(object obj)
+    private void Update(object? parameter)
     {
-        throw new NotImplementedException();
-    }
-    
+        string? path = SelectedFile?.FullName[..SelectedFile.FullName.LastIndexOf(@"\")];
+
+        if (!string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(NewFileNameInput))
+        {
+            switch (SelectedFile)
+            {
+                case DirectoryViewModel directory:
+                    {
+                        DirectoryInfo dirinfo = new(directory.FullName);
+                        dirinfo.MoveTo(Path.Combine(path, NewFileNameInput));
+                        break;
+                    }
+
+                case FileViewModel file:
+                    {
+                        string supposedName = $"{NewFileNameInput}{file.Extension}";
+
+                        bool canRename = !Directories
+                            .Where(d => d is FileViewModel)
+                            .Cast<FileViewModel>()
+                            .Any(f => f.Name.Equals(supposedName));
+
+                        if (canRename)
+                        {
+                            File.Move(SelectedFile.FullName, Path.Combine(path, supposedName));
+                        }
+
+                        break;
+                    }
+            }
+        }
+    } 
     private void Delete(object? parameter)
     {
         if (parameter is DirectoryViewModel directoryViewModel)
@@ -218,7 +247,6 @@ public class DirectoryTabItemViewModel : BaseViewModel
             Directories.Remove(fileViewModel);
         }
     }
-
     private void ExecuteFile(FileViewModel fileViewModel)
     {
         Process p = new()

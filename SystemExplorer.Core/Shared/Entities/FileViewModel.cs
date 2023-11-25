@@ -5,7 +5,7 @@ namespace SystemExplorer.Core.Shared.Entities;
 public sealed class FileViewModel : FileEntityViewModel
 {
     public string Name { get; set; }
-
+    public string? Extension => Name[Name.LastIndexOf(".")..];
 
     public FileViewModel(string fileFullName, string fileName) 
         : base(fileFullName)
