@@ -39,6 +39,9 @@
 							<local:FileCreationInfoControl/>
 						</MenuItem>
 					</MenuItem>
+					<MenuItem Header="Удалить"
+							  Command="{Binding DeleteCommand}"
+							  CommandParameter="{Binding SelectedFile}"/>
 				</ContextMenu>
 			</ListBox.ContextMenu>
 

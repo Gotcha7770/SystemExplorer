@@ -5,7 +5,6 @@ using SystemExplorer.Core.Shared.BaseModels.Abstract;
 using SystemExplorer.Core.Shared.Commands;
 using SystemExplorer.Core.Shared.Entities.Abstract;
 using SystemExplorer.Core.Shared.Entities;
-using System.Text;
 
 namespace SystemExplorer.Core.Shared.ViewModels;
 
@@ -202,9 +201,22 @@ public class DirectoryTabItemViewModel : BaseViewModel
     {
         throw new NotImplementedException();
     }
-    private void Delete(object obj)
+    
+    private void Delete(object? parameter)
     {
-        throw new NotImplementedException();
+        if (parameter is DirectoryViewModel directoryViewModel)
+        {
+            Directory.Delete(directoryViewModel.FullName, true);
+
+            //FilePath = FilePath.Remove(FilePath.LastIndexOf(@"\"));
+            //Name = FilePath[FilePath.LastIndexOf(@"\")..];
+            Directories.Remove(directoryViewModel);
+        }
+        else if (parameter is FileViewModel fileViewModel)
+        {
+            File.Delete(fileViewModel.FullName);
+            Directories.Remove(fileViewModel);
+        }
     }
 
     private void ExecuteFile(FileViewModel fileViewModel)
