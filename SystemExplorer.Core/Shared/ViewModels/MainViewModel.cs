@@ -9,7 +9,7 @@ public class MainViewModel : BaseViewModel
 {
     #region Private Variables
     private ObservableCollection<DirectoryTabItemViewModel> directoryTabItems = new();
-    private DirectoryTabItemViewModel currentDirectoryTabItem = new();
+    private DirectoryTabItemViewModel? currentDirectoryTabItem = new();
     #endregion
 
     public ObservableCollection<DirectoryTabItemViewModel> DirectoryTabItems 
@@ -21,7 +21,7 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public DirectoryTabItemViewModel CurrentDirectoryTabItem 
+    public DirectoryTabItemViewModel? CurrentDirectoryTabItem 
     { 
         get => currentDirectoryTabItem;
         set 

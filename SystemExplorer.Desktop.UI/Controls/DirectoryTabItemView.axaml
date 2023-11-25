@@ -2,15 +2,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:SystemExplorer.Core.Shared.ViewModels"
+			 xmlns:local="clr-namespace:SystemExplorer.Desktop.UI.Controls;assembly=SystemExplorer.Desktop.UI"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="SystemExplorer.Desktop.UI.Controls.DirectoryTabItemView">
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SystemExplorer.Desktop.UI.Controls.DirectoryTabItemView"
+			 >
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		
+
 		<TextBox Text="{Binding FilePath}">
 			<TextBox.KeyBindings>
 				<KeyBinding Gesture="Enter"
@@ -19,39 +21,41 @@
 			</TextBox.KeyBindings>
 		</TextBox>
 		
-		<ListBox Grid.Row="1"
+		<ListBox x:Name="items"	
+			     Grid.Row="1"
 				 ItemsSource="{Binding Directories}"
 				 SelectedItem="{Binding SelectedFile}"
 				 Height="{Binding $parent.Bounds.Height, 
 						  RelativeSource={
 							RelativeSource FindAncestor, 
-							AncestorType={x:Type UserControl
-							}}}">			
+							AncestorType={x:Type UserControl}}}">			
 			<ListBox.ContextMenu>
 				<ContextMenu>
 					<MenuItem Header="Создать">
 						<MenuItem Header="Папку" 
 								  Command="{Binding CreateDirectoryCommand}"
 								  CommandParameter="{Binding FilePath}"/>
-						<MenuItem Header="Файл"/>
+						<MenuItem Header="Файл">
+							<local:FileCreationInfoControl/>
+						</MenuItem>
 					</MenuItem>
 				</ContextMenu>
 			</ListBox.ContextMenu>
-			
+
 			<Interaction.Behaviors>
 				<EventTriggerBehavior EventName="DoubleTapped">
 					<InvokeCommandAction Command="{Binding OpenCommand}"
 										 CommandParameter="{Binding SelectedFile}"/>
 				</EventTriggerBehavior>
-			</Interaction.Behaviors>		
-			
+			</Interaction.Behaviors>
+	
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Grid Background="Transparent">
 						<TextBlock Text="{Binding Name}"/>
 					</Grid>
-				</DataTemplate>
+				</DataTemplate>		
 			</ListBox.ItemTemplate>
-		</ListBox>
+		</ListBox>	
 	</Grid>
 </UserControl>

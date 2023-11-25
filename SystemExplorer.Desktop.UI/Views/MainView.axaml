@@ -53,7 +53,7 @@
 				</DataTemplate>
 			</TabControl.ItemTemplate>
 			
-			<TabControl.ContentTemplate>				
+			<TabControl.ContentTemplate>
 				<DataTemplate>
 					<controls:DirectoryTabItemView/>
 				</DataTemplate>

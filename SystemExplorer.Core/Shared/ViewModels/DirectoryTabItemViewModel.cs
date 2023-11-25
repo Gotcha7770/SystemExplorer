@@ -5,6 +5,7 @@ using SystemExplorer.Core.Shared.BaseModels.Abstract;
 using SystemExplorer.Core.Shared.Commands;
 using SystemExplorer.Core.Shared.Entities.Abstract;
 using SystemExplorer.Core.Shared.Entities;
+using System.Text;
 
 namespace SystemExplorer.Core.Shared.ViewModels;
 
@@ -13,8 +14,13 @@ public class DirectoryTabItemViewModel : BaseViewModel
     #region Private Variables
     private string filePath = string.Empty;
     private string name = string.Empty;
+    private string newFileNameInput = "Введите название файла:";
+    // Use certain ENUM for a corresponding file system
+    private List<string> fileExtensions = new List<string>() 
+    { ".txt", ".doc", ".xml", ".zip"};
+    private string selectedExtension;
     private ObservableCollection<FileEntityViewModel> directories = new();
-    private FileEntityViewModel selectedFile;
+    private FileEntityViewModel? selectedFile;
     #endregion
 
     #region Public Properties
@@ -38,6 +44,29 @@ public class DirectoryTabItemViewModel : BaseViewModel
         }
     }
 
+    public string NewFileNameInput
+    {
+        get => newFileNameInput;
+        set
+        {
+            Set(ref newFileNameInput, value);
+            OnPropertyChanged();
+        }
+    }
+
+    public List<string> FileExtensions 
+        => fileExtensions;
+
+    public string SelectedExtension
+    {
+        get => selectedExtension;
+        set
+        {
+            Set(ref selectedExtension, value);
+            OnPropertyChanged();
+        }
+    }
+
     public ObservableCollection<FileEntityViewModel> Directories
     {
         get => directories;
@@ -48,7 +77,7 @@ public class DirectoryTabItemViewModel : BaseViewModel
         }
     }
 
-    public FileEntityViewModel SelectedFile
+    public FileEntityViewModel? SelectedFile
     {
         get => selectedFile;
         set
@@ -77,6 +106,9 @@ public class DirectoryTabItemViewModel : BaseViewModel
     public ICommand CreateDirectoryCommand =>
         new DelegateCommand(CreateDirectory);
 
+    public ICommand CreateFileCommand =>
+        new DelegateCommand(CreateFile);
+
     public ICommand UpdateCommand =>
         new DelegateCommand(Update);
 
@@ -85,12 +117,12 @@ public class DirectoryTabItemViewModel : BaseViewModel
 
     public ICommand CloseCommand =>
         new DelegateCommand(Close);
-
-    private void Close(object obj) =>
-        Closed?.Invoke(this, EventArgs.Empty);
     #endregion
 
     public event EventHandler? Closed;
+
+    private void Close(object obj) =>
+        Closed?.Invoke(this, EventArgs.Empty);
 
     private void Open(object? parameter = null)
     {
@@ -145,6 +177,24 @@ public class DirectoryTabItemViewModel : BaseViewModel
 
                 Directory.CreateDirectory(path + $" ({newDirectoryIndex + 1})");
             }
+        }
+    }
+    private void CreateFile(object? parameter)
+    {
+        if (string.IsNullOrEmpty(NewFileNameInput?.ToString())) 
+            NewFileNameInput = "New_file";
+        if (string.IsNullOrEmpty(SelectedExtension?.ToString())) 
+            SelectedExtension = ".txt";
+
+        string path = FilePath + $"\\{NewFileNameInput}{SelectedExtension}";
+
+        if (!File.Exists(path))
+        {
+            File.Create(path);
+        }
+        else
+        {
+            throw new Exception("Файл с данным названием уже существует в указанном расположении.");
         }
     }
 

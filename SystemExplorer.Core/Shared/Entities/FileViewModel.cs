@@ -6,6 +6,7 @@ public sealed class FileViewModel : FileEntityViewModel
 {
     public string Name { get; set; }
 
+
     public FileViewModel(string fileFullName, string fileName) 
         : base(fileFullName)
     {
