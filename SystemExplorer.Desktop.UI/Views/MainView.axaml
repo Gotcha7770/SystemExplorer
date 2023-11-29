@@ -10,54 +10,84 @@
         x:Class="SystemExplorer.Desktop.UI.Views.MainView"
 		x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="SystemExplorer.Desktop.UI">
-	<Grid>
-		<TabControl ItemsSource="{Binding DirectoryTabItems}"
-	                SelectedItem="{Binding CurrentDirectoryTabItem}">
-			<TabControl.Template>
-				<ControlTemplate>
-					<Border Margin="{TemplateBinding Margin}"
-							BorderBrush="{TemplateBinding BorderBrush}"
-							BorderThickness="{TemplateBinding BorderThickness}"
-							Background="{TemplateBinding Background}"
-							HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-							VerticalAlignment="{TemplateBinding VerticalAlignment}">
-						<StackPanel>
+        Title="SystemExplorer.Desktop.UI"
+		SystemDecorations="None"
+		CornerRadius="10">
+	<Border Background="Black">
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="35"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+
+				<ListBox ItemsSource="{Binding DirectoryTabItems}"
+						 SelectedItem="{Binding CurrentDirectoryTabItem}">
+					<ListBox.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Orientation="Horizontal"/>
+						</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+					<ListBox.ItemTemplate>
+						<DataTemplate>
 							<StackPanel Orientation="Horizontal">
-								<ItemsPresenter Name="PART_ItemsPresenter"
-												ItemsPanel="{TemplateBinding ItemsPanel}"/>
-								<Button Margin="2"
-										Command="{Binding AddTabItemCommand}"
-										Content="+"
+								<TextBlock Text="{Binding Name}"/>
+								<Button Command="{Binding CloseCommand}"
+										Content="X"
 										Width="{Binding $self.Bounds.Height}"/>
 							</StackPanel>
-							<ContentPresenter Name="PART_SelectedContentHost"
-											  Margin="{TemplateBinding Padding}"
-											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-											  Content="{TemplateBinding SelectedContent}"
-											  ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
-						</StackPanel>
-					</Border>
-				</ControlTemplate>
-			</TabControl.Template>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+				
+				<Button Grid.Column="1"
+						Margin="2"
+						Command="{Binding AddTabItemCommand}"
+						Content="+"
+						Width="{Binding $self.Bounds.Height}"/>
+
+				<StackPanel Orientation="Horizontal"
+							HorizontalAlignment="Right"
+							VerticalAlignment="Top"
+							Grid.Column="2">
+					<Button Width="45" 
+							Height="30" 
+							VerticalContentAlignment="Center"
+							HorizontalContentAlignment="Center">_</Button>
+					<Button Width="45"
+							Height="30"
+							VerticalContentAlignment="Center"
+							HorizontalContentAlignment="Center">P</Button>
+					<Button Width="45" 
+							Height="30"
+							VerticalContentAlignment="Center"
+							HorizontalContentAlignment="Center">X</Button>
+				</StackPanel>
+			</Grid>
+
+			<StackPanel Background="#FF353535" 
+						Grid.Row="1"
+						Orientation="Horizontal">
+				<Menu>
+					<MenuItem Header="test_bookmark"/>
+				</Menu>
+			</StackPanel>
 			
-			<TabControl.ItemTemplate>				
-				<DataTemplate>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="{Binding Name}"/>
-						<Button Command="{Binding CloseCommand}"
-								Content="X"
-								Width="{Binding $self.Bounds.Height}"/>
-					</StackPanel>
-				</DataTemplate>
-			</TabControl.ItemTemplate>
-			
-			<TabControl.ContentTemplate>
-				<DataTemplate>
-					<controls:DirectoryTabItemView/>
-				</DataTemplate>
-			</TabControl.ContentTemplate>
-		</TabControl>		
-	</Grid>
+			<ContentControl Grid.Row="2"
+								Content="{Binding CurrentDirectoryTabItem}">
+					<ContentControl.ContentTemplate>
+						<DataTemplate>
+							<controls:DirectoryTabItemView/>
+						</DataTemplate>
+					</ContentControl.ContentTemplate>
+				</ContentControl>				
+		</Grid>
+	</Border>
 </Window>

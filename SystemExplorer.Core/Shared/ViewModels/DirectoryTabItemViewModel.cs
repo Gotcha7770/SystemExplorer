@@ -7,6 +7,7 @@ using SystemExplorer.Core.Shared.Entities.Abstract;
 using SystemExplorer.Core.Shared.Entities;
 
 namespace SystemExplorer.Core.Shared.ViewModels;
+
 /// <summary>
 /// TODO: <br/>
 /// 1) Use certain ENUM for a corresponding file system? <br/>
@@ -222,8 +223,10 @@ public class DirectoryTabItemViewModel : BaseViewModel
                             .Any(f => f.Name.Equals(supposedName));
 
                         if (canRename)
-                        {
+                        {                            
                             File.Move(SelectedFile.FullName, Path.Combine(path, supposedName));
+                            Directories.Remove(Directories.Single(d => d.FullName.Equals(SelectedFile.FullName)));
+                            Directories.Add(new FileViewModel(Path.Combine(path, supposedName), supposedName));
                         }
 
                         break;
