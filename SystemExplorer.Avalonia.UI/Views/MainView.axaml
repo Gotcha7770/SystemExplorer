@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:uc="clr-namespace:SystemExplorer.Avalonia.UI.UserControls;assembly=SystemExplorer.Avalonia.UI"
+			 mc:Ignorable="d" Height="550"
+             x:Class="SystemExplorer.Avalonia.UI.Views.MainView">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="300"/>
+			<ColumnDefinition Width="800"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="70"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+
+
+		<uc:NavigationControl Grid.ColumnSpan="2"
+						      Grid.Row="0" />			
+
+		<uc:SideBarControl Grid.Column="0"
+						   Grid.Row="1"/>
+	</Grid>
+</UserControl>
