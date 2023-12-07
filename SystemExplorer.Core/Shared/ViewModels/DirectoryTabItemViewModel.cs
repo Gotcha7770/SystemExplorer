@@ -5,6 +5,9 @@ using SystemExplorer.Core.Shared.BaseModels.Abstract;
 using SystemExplorer.Core.Shared.Commands;
 using SystemExplorer.Core.Shared.Entities.Abstract;
 using SystemExplorer.Core.Shared.Entities;
+using SystemExplorer.Core.Shared.ViewModels.Base;
+using System.Net.Mail;
+using ReactiveUI;
 
 namespace SystemExplorer.Core.Shared.ViewModels;
 
@@ -14,7 +17,7 @@ namespace SystemExplorer.Core.Shared.ViewModels;
 /// 2) Distribute methods to their ViewModels and make them static <br/>
 /// 3) Improve methods create, delete, update (they`re too heavy and partially dumb as ****) <br/>
 /// </summary>
-public class DirectoryTabItemViewModel : BaseViewModel
+public class DirectoryTabItemViewModel : PageViewModelBase
 {
     #region Private Variables
     private string filePath = string.Empty;
@@ -96,6 +99,9 @@ public class DirectoryTabItemViewModel : BaseViewModel
 
         foreach (var dir in Directory.GetLogicalDrives())
             Directories.Add(new DirectoryViewModel(new DirectoryInfo(dir)));
+
+        this.WhenAnyValue(x => x.Name, x => x.FilePath)
+            .Subscribe(_ => UpdateCanNavigateNext());
     }
 
     #region Commands
@@ -121,6 +127,30 @@ public class DirectoryTabItemViewModel : BaseViewModel
         new DelegateCommand(Close);
     #endregion
 
+    #region navigation
+    private bool _CanNavigateNext;
+
+
+    public override bool CanNavigateNext
+    {
+        get => _CanNavigateNext;
+        protected set 
+        {
+            Set(ref  _CanNavigateNext, value);
+            this.OnPropertyChanged();
+        }
+    }
+    public override bool CanNavigatePrevious
+    {
+        get => throw new NotImplementedException();
+        protected set => throw new NotImplementedException();
+    }
+
+    private void UpdateCanNavigateNext()
+    {
+        CanNavigateNext = true;
+    }
+    #endregion navigation
     public event EventHandler? Closed;
 
     private void Close(object obj) =>

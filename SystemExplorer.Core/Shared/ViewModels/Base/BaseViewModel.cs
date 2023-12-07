@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using ReactiveUI;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace SystemExplorer.Core.Shared.BaseModels.Abstract;
 
 public class BaseViewModel
-    : INotifyPropertyChanged
+    : ReactiveObject, INotifyPropertyChanged
 {
     #region Public Properties
     #endregion

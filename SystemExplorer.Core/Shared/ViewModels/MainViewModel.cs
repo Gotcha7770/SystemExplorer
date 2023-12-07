@@ -2,10 +2,11 @@
 using System.Windows.Input;
 using SystemExplorer.Core.Shared.BaseModels.Abstract;
 using SystemExplorer.Core.Shared.Commands;
+using SystemExplorer.Core.Shared.ViewModels.Base;
 
 namespace SystemExplorer.Core.Shared.ViewModels;
 
-public class MainViewModel : BaseViewModel
+public class MainViewModel : PageViewModelBase
 {
     #region Private Variables
     private ObservableCollection<DirectoryTabItemViewModel> directoryTabItems = new();
@@ -38,6 +39,17 @@ public class MainViewModel : BaseViewModel
 
     public ICommand AddTabItemCommand =>
         new DelegateCommand(AddTabItem);
+
+    public override bool CanNavigateNext 
+    { 
+        get => true; 
+        protected set => throw new NotSupportedException(); 
+    }
+    public override bool CanNavigatePrevious 
+    { 
+        get => true; 
+        protected set => throw new NotSupportedException(); 
+    }
 
     private void AddTabItem(object obj) =>
         AddTabItem();
