@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+    <Folder Include="Factories\Implementations\" />
+    <Folder Include="Factories\Interfaces\" />
+    <Folder Include="Implementations\Behaviors\" />
+    <Folder Include="Implementations\Dialogs\" />
+    <Folder Include="Implementations\MainWindow\" />
+    <Folder Include="Implementations\Menu\" />
+    <Folder Include="Implementations\Settings\" />
+    <Folder Include="Interfaces\Behaviors\" />
+    <Folder Include="Interfaces\MainWindow\" />
+    <Folder Include="Interfaces\Menu\" />
+    <Folder Include="Interfaces\Properties\" />
+    <Folder Include="Interfaces\Settings\" />
+    <Folder Include="Services\Implementations\" />
+    <Folder Include="Services\Interfaces\" />
+  </ItemGroup>
+
+</Project>

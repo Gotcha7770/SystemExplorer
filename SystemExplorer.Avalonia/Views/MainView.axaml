@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:SystemExplorer.Avalonia.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SystemExplorer.Avalonia.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+	
+	<Grid RowDefinitions="35,Auto,*,Auto">
+		<Grid Classes="topPanelGrid" ColumnDefinitions="Auto,Auto,*,Auto">
+			<main:MenuView DataContext="{Binding MenuViewModel}" />
+			<operationsStates:OperationsStatesListView Grid.Column="1" DataContext="{Binding OperationsStateViewModel}" />
+			<main:TopOperationsView Grid.Column="3" DataContext="{Binding TopOperationsViewModel}" />
+		</Grid>
+
+		<Grid Grid.Row="1" ColumnDefinitions="Auto,*">
+			<drives:DrivesListView DataContext="{Binding DrivesListViewModel}" />
+			<favouriteDirectories:FavouriteDirectoriesListView Grid.Column="1" DataContext="{Binding FavouriteDirectoriesListViewModel}" />
+		</Grid>
+
+		<Grid Grid.Row="2" ColumnDefinitions="*,Auto,*">
+			<main:FilesPanelView DataContext="{Binding LeftFilesPanelViewModel}" />
+			<GridSplitter Grid.Column="1" ShowsPreview="False" Width="2"
+                          HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+			<main:FilesPanelView Grid.Column="2" DataContext="{Binding RightFilesPanelViewModel}" />
+		</Grid>
+
+		<main:OperationsView Grid.Row="3" DataContext="{Binding OperationsViewModel}" />
+
+		<Grid x:Name="OverlayGrid" Grid.Row="0" Grid.RowSpan="4" />
+	</Grid>
+	
+</UserControl>
