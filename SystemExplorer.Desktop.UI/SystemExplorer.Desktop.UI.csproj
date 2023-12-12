@@ -11,6 +11,14 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
+  
+  <ItemGroup>
+    <AvaloniaXaml Remove="Behaviors\**" />
+    <Compile Remove="Behaviors\**" />
+    <EmbeddedResource Remove="Behaviors\**" />
+    <None Remove="Behaviors\**" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.2" />
@@ -35,9 +43,5 @@
     <Compile Update="Views\MainView.axaml.cs">
       <DependentUpon>MainView.axaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Behaviors\" />
   </ItemGroup>
 </Project>
