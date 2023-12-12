@@ -7,21 +7,39 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Configuration\" />
-    <Folder Include="Factories\Implementations\" />
-    <Folder Include="Factories\Interfaces\" />
-    <Folder Include="Implementations\Behaviors\" />
-    <Folder Include="Implementations\Dialogs\" />
-    <Folder Include="Implementations\MainWindow\" />
-    <Folder Include="Implementations\Menu\" />
-    <Folder Include="Implementations\Settings\" />
-    <Folder Include="Interfaces\Behaviors\" />
-    <Folder Include="Interfaces\MainWindow\" />
-    <Folder Include="Interfaces\Menu\" />
-    <Folder Include="Interfaces\Properties\" />
-    <Folder Include="Interfaces\Settings\" />
-    <Folder Include="Services\Implementations\" />
-    <Folder Include="Services\Interfaces\" />
+    <Compile Remove="Configuration\**" />
+    <Compile Remove="Implementations\Behaviors\**" />
+    <Compile Remove="Implementations\Dialogs\**" />
+    <Compile Remove="Implementations\MainWindow\**" />
+    <Compile Remove="Implementations\Menu\**" />
+    <Compile Remove="Implementations\Settings\**" />
+    <Compile Remove="Interfaces\Behaviors\**" />
+    <Compile Remove="Interfaces\MainWindow\**" />
+    <Compile Remove="Interfaces\Menu\**" />
+    <Compile Remove="Interfaces\Properties\**" />
+    <Compile Remove="Interfaces\Settings\**" />
+    <EmbeddedResource Remove="Configuration\**" />
+    <EmbeddedResource Remove="Implementations\Behaviors\**" />
+    <EmbeddedResource Remove="Implementations\Dialogs\**" />
+    <EmbeddedResource Remove="Implementations\MainWindow\**" />
+    <EmbeddedResource Remove="Implementations\Menu\**" />
+    <EmbeddedResource Remove="Implementations\Settings\**" />
+    <EmbeddedResource Remove="Interfaces\Behaviors\**" />
+    <EmbeddedResource Remove="Interfaces\MainWindow\**" />
+    <EmbeddedResource Remove="Interfaces\Menu\**" />
+    <EmbeddedResource Remove="Interfaces\Properties\**" />
+    <EmbeddedResource Remove="Interfaces\Settings\**" />
+    <None Remove="Configuration\**" />
+    <None Remove="Implementations\Behaviors\**" />
+    <None Remove="Implementations\Dialogs\**" />
+    <None Remove="Implementations\MainWindow\**" />
+    <None Remove="Implementations\Menu\**" />
+    <None Remove="Implementations\Settings\**" />
+    <None Remove="Interfaces\Behaviors\**" />
+    <None Remove="Interfaces\MainWindow\**" />
+    <None Remove="Interfaces\Menu\**" />
+    <None Remove="Interfaces\Properties\**" />
+    <None Remove="Interfaces\Settings\**" />
   </ItemGroup>
 
 </Project>
